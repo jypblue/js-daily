@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+<title>touchEvent demo</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+<style type="text/css" media="screen">
+  div{width:40%;height:100px;margin:10px;background-color:#666;text-align:center;font-size:18px;color:#fff;line-height:100px;}
+</style>
+<script type="text/javascript" src="touchevent.js"></script>
+</head>
+<body>
+    <div class="box1">单次触摸我</div>
+    <div class="box2">两次触摸</div>
+    <div class="box3">长按我</div>
+    <span>在屏幕上任意区域滑动</span>
+    <div class="info"></div>
+
+    <script type="text/javascript">
+    window.onload = function() {
+      var box1=document.querySelector(".box1"),
+      box2 = document.querySelector(".box2"),
+      box3 = document.querySelector('.box3'),
+      info = document.querySelector('.info');
+
+
+      touchevent.tap(box1,function(){
+        info.innerHTML = "单次触摸";
+      })
+
+      touchevent.doubleTap(box2,function(){
+        info.innerHTML = "两次触摸";
+      })
+
+      touchevent.longTap(box3,function(){
+        info.innerHTML = "长按";
+      })
+
+      touchevent.swipe(document,function(){
+        info.innerHTML = "滑屏了";
+      })
+
+      touchevent.swipeUp(document,function(){
+        info.innerHTML = "向上滑屏了";
+      })
+
+      touchevent.swipeDown(document,function(){
+        info.innerHTML = "向下滑屏了";
+      })
+
+      touchevent.swipeLeft(document,function(){
+        info.innerHTML = "向左滑屏了";
+      })
+
+      touchevent.swipeRight(document,function(){
+        info.innerHTML = "向右滑屏了";
+      })
+    }
+    </script>
+</body>
+</html>
