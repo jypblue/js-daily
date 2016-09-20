@@ -23,7 +23,7 @@
 })(function($, undefined) {
 
   var defaultOptions = {
-    threshold: 0,
+    threshold: 80,
     placeholder: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8 PB/AAffA0nNPuCLAAAAAElFTkSuQmCC'
   }
 
@@ -33,9 +33,9 @@
 
       var $this = $(this),
         _winScrollTop = 0,
-        _winheight = $(window).height();
+        _winHeight = $(window).height();
 
-      if ($.isPlainObject(options)) {
+      if (!$.isPlainObject(options)) {
         options = {};
       }
 
@@ -46,7 +46,6 @@
       lazyload();
 
       $(window).on('scroll', function() {
-
         _winScrollTop = $(window).scrollTop();
         lazyload();
       })
@@ -61,7 +60,7 @@
             if (_self.attr('data-original')) {
               var _offsetTop = _self.offset().top;
 
-              if ((_offsetTop - options.threshold) <= (_winheight + _winScrollTop)) {
+              if ((_offsetTop - options.threshold) <= (_winHeight + _winScrollTop)) {
                 _self.attr('src', _self.attr('data-original'));
                 _self.removeAttr('data-original');
               }
@@ -72,13 +71,14 @@
             if (_self.attr('data-original')) {
 
               //默认占位图片
-              if (_self.css('background-image') === 'none') {
+              if (_self.css('background-image') == "none") {
                 _self.css('background-image', 'url(' + options.placeholder + ')');
               }
 
               var _offsetTop = _self.offset().top;
-              if ((_offsetTop - options.threshold) <= (_winheight + _winScrollTop)) {
-                _self.css('background-image', _self.attr('data-original'));
+              if ((_offsetTop - options.threshold) <= (_winHeight + _winScrollTop)) {
+
+                _self.css('background-image', 'url(' + _self.attr('data-original') + ')');
                 _self.removeAttr('data-original');
               }
             }

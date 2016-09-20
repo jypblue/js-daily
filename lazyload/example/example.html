@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+<script type="text/javascript" src="zepto.js"></script>
+<script type="text/javascript" src="../lazyload.js"></script>
+<script type="text/javascript" src="../lazyload-js.js"></script>
+</head>
+<body>
+      <div class="1">
+        <h2>1</h2>
+        <img class="lazy" data-original="img/1px.jpg" width="400" height="300" alt="">
+      </div>
+      <div class="1">
+        <h2>2</h2>
+        <img class="lazy" data-original="img/1px.jpg" width="400" height="300" alt="">
+      </div>
+      <div class="1">
+        <h2>3</h2>
+        <img class="lazy" data-original="img/1px.jpg" width="400" height="300" alt="">
+      </div>
+            <div class="1">
+        <h2>4</h2>
+        <img class="lazy" data-original="img/1px.jpg" width="400" height="300" alt="">
+      </div>
+      <div class="1">
+        <h2>5</h2>
+        <img class="lazy" data-original="img/1px.jpg" width="400" height="300" alt="">
+      </div>
+      <div class="1">
+        <h2>6</h2>
+        <img class="lazy" data-original="img/1px.jpg" width="400" height="300" alt="">
+      </div>
+      <div class="lazy" data-original="img/1px.jpg" style="width:400px;height: 300px;border: 1px solid #000;">
+
+      </div>
+    <script type="text/javascript">
+
+        // $(function(){
+        //   $('.lazy').lazyload();
+        // })
+
+        window.onload = function(){
+          var lazyload = new LazyLoad({
+            el: '.lazy',
+            threshold: 0
+          })
+        }
+
+    </script>
+</body>
+</html>
