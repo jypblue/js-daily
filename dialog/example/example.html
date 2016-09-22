@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>dialog example</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="../css/base.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="../css/dialog.css">
+<script type="text/javascript" src='../dialog.js'></script>
+</head>
+<body>
+
+  <input type="button" id="alert" value="alert" name=""/>
+
+  <script type="text/javascript">
+   var $alert = document.getElementById('alert');
+
+   $alert.onclick = function(){
+    dialog.alert({
+      content:'测试的是alert!'
+    });
+   }
+
+  </script>
+
+</body>
+</html>

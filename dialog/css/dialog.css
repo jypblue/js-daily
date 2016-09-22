@@ -1,0 +1,104 @@
+@charset "utf-8";
+
+/*弹出层样式*/
+.ui_dialog_mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #000;
+  opacity: 0.5;
+  filter: "alpha(opacity=57)";   /* IE 8 */
+  filter: alpha(opacity=57);  /* IE 4-7 */
+}
+.ui_dialog_window {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  background: #fff;
+  width: 300px;
+  box-shadow: 1px 3px 5px #666;
+  padding: 10px;
+}
+.ui_dialog_hd {
+  background: #fff;
+  padding: 0;
+  margin: 0;
+  height: 32px;
+  line-height: 32px;
+  cursor: move;
+  color: #555;
+  position: relative;
+}
+.ui_dialog_hd h3 {
+  font-size: 16px;
+  overflow: hidden;
+  font-weight: normal;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.ui_dialog_close:before {
+  content: "\00D7";
+  font-size: 32px;
+}
+.ui_dialog_close {
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  top: 0;
+  right: -4px;
+}
+.ui_dialog_bd {
+  padding: 10px;
+  clear: both;
+}
+.ui_dialog_type_alert .ui_dialog_bd, .ui_dialog_type_confirm .ui_dialog_bd {
+  padding: 20px 25px;
+  font-size: 14px;
+  box-sizing: border-box;
+  word-wrap: break-word;
+  word-break: break-all;
+  overflow: hidden;
+}
+.ui_dialog_ft {
+  padding: 5px 0;
+  background: #fff;
+  text-align: center;
+}
+.btn {
+  display: inline-block;
+  padding: 5px 15px;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: default;
+  border: 0;
+  line-height: 1.8;
+  white-space: nowrap;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 14px;
+}
+.btn:hover {
+  color: #fff;
+  text-decoration: none;
+}
+.btn_enter, .btn_cancel {
+  color: #fff;
+  background: #40BFA5;
+  margin: 0 5px;
+}
+.btn_enter:hover {
+  color: #fff;
+}
+.btn_cancel {
+  color: #555;
+  background: #E5E5E5;
+}
+.btn_cancel:hover {
+  color: #555;
+}
+.loading {
+}
