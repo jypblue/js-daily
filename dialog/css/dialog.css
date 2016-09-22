@@ -8,8 +8,7 @@
   width: 100%;
   background: #000;
   opacity: 0.5;
-  filter: "alpha(opacity=57)";   /* IE 8 */
-  filter: alpha(opacity=57);  /* IE 4-7 */
+  filter: "alpha(opacity=50)";   /* IE 8 */
 }
 .ui_dialog_window {
   position: fixed;
@@ -29,6 +28,7 @@
   cursor: move;
   color: #555;
   position: relative;
+  border-bottom: 1px solid #eee;
 }
 .ui_dialog_hd h3 {
   font-size: 16px;
@@ -48,8 +48,8 @@
   width: 32px;
   height: 32px;
   position: absolute;
-  top: 0;
-  right: -4px;
+  top: -2px;
+  right: -12px;
 }
 .ui_dialog_bd {
   padding: 10px;

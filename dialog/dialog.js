@@ -2,7 +2,7 @@
  * @Author: jypblue
  * @Date:   2016-09-22 17:49:55
  * @Last Modified by:   jypblue
- * @Last Modified time: 2016-09-22 18:00:46
+ * @Last Modified time: 2016-09-22 20:57:09
  */
 
 'use strict';
@@ -22,9 +22,7 @@
   'use strict';
   var tips = {
     title: '提示信息',
-    enter: '确定',
-    cancel: '取消',
-    close: ''
+    btn: ['确定', '取消']
   }
   var d = {};
 
@@ -40,13 +38,14 @@
 
   //弹窗alert 确定
   d.alert = function(options) {
+    var _this = this;
     var parentWindow = win[this.globalSet.pos];
     var doc = parentWindow.document;
-    console.log(parentWindow);
     var set = extend({
       width: 300, //宽
       height: 70, //高
       type: 'alert', //类型
+      content: '', //内容
       zIndex: 1000 //层级z-index
     }, options || {});
 
@@ -70,7 +69,8 @@
     //点击确定按钮执行的函数
     doms.btnEnter.onclick = function() {
       d.close();
-      set.callback && set.callback.call(_this, true, doms)
+      //回调
+      set.callback && set.callback.call(d, true, doms)
     };
 
     //拖动
@@ -102,10 +102,44 @@
     return doms;
   }
 
-  //弹窗comfirm 选择
-  d.comfirm = function(options) {
+  //弹窗confirm 选择
+  d.confirm = function(options) {
+
+    var set = extend({
+      type: 'confirm'
+    }, options || {});
+
+    var doms = this.alert(set);
+
+    doms.dialogFooter.appendChild(doms.btnCancel);
+
+    //点击确定回调
+    doms.btnEnter.onclick = function() {
+      //获取插入的content的dom
+      var data = document.getElementById('dialogBody');
+      //关闭弹框
+      d.close();
+      //回调
+      set.ok && set.ok.call(d, data, doms);
+    };
+
+    //点击取消回调
+    doms.btnCancel.onclick = function() {
+      d.close();
+      set.cancel && set.cancel.call(d, false, doms);
+    }
+  }
+
+  //页面层 html
+  d.loadHtml = function(options) {
 
   }
+
+  //加载iframe
+  d.loadIframe: function(options) {
+
+  }
+
 
 
   //关闭弹窗
@@ -118,6 +152,11 @@
     }
     remove(this.dialogs[0], db);
     this.dialogs.length = 0;
+  }
+
+  //关闭所有弹窗
+  d.closeAll = function() {
+
   }
 
 
@@ -154,11 +193,11 @@
         '<div class="ui_dialog_mask" style="height:' + h + 'px;z-index:' + (options.zIndex) + '"></div>', db),
       dialogWindow = createEl.call(doc, '<div class="ui_dialog_window ui_dialog_type_' + options.type + '" style="width:' + width + 'px;z-index:' + options.zIndex + '"></div>', db),
       dialogHeader = createEl.call(doc, '<div class="ui_dialog_hd"><h3>' + (options.title || tips.title) + '</h3></div>', dialogWindow),
-      close = createEl.call(doc, '<a href="javascript:void(0);" class="ui_dialog_close">' + tips.close + '</a>', dialogHeader),
-      dialogBody = createEl.call(doc, '<div class="ui_dialog_bd" style="height:' + height + ';"></div>', dialogWindow),
+      close = createEl.call(doc, '<a href="javascript:void(0);" class="ui_dialog_close"></a>', dialogHeader),
+      dialogBody = createEl.call(doc, '<div id="dialogBody" class="ui_dialog_bd" style="height:' + height + ';"></div>', dialogWindow),
       dialogFooter = createEl.call(doc, '<div class="ui_dialog_ft"></div>', dialogWindow),
-      btnEnter = createEl.call(doc, '<a href="javascript:;" class="btn btn_enter">' + (options.enter || tips.enter) + '</a>', dialogFooter),
-      btnCancel = createEl.call(doc, '<a href="javascript:;" class="btn btn_cancel">' + (options.cancel || tips.cancel) + '</a>');
+      btnEnter = createEl.call(doc, '<a href="javascript:;" class="btn btn_enter">' + (options.btn[0] || tips.btn[0]) + '</a>', dialogFooter),
+      btnCancel = createEl.call(doc, '<a href="javascript:;" class="btn btn_cancel">' + (options.btn[1] || tips.btn[1]) + '</a>');
 
     return {
       dialogMask: dialogMask,

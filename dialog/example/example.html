@@ -13,15 +13,35 @@
 <body>
 
   <input type="button" id="alert" value="alert" name=""/>
+  <input type="button" id="confirm" value="confirm" name="">
 
   <script type="text/javascript">
    var $alert = document.getElementById('alert');
+   var $confirm = document.getElementById('confirm');
 
    $alert.onclick = function(){
     dialog.alert({
-      content:'测试的是alert!'
+      content:'测试的是alert!',
+      btn:[''],
+      callback:function(v){
+        alert(v);
+      }
     });
    }
+
+   $confirm.onclick = function(){
+      dialog.confirm({
+        content:'在测试的是confirm!',
+        btn:['确定','取消'],
+        ok:function(v){
+          alert(v)
+        },
+        cancel:function(v){
+          alert(v);
+        }
+      });
+   }
+
 
   </script>
 
