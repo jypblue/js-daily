@@ -12,17 +12,21 @@
 </head>
 <body>
 
-  <input type="button" id="alert" value="alert" name=""/>
+  <input type="button" id="alert1" class="alert" value="alert" name=""/>
   <input type="button" id="confirm" value="confirm" name="">
+  <input type="button" id="loadHtml" value="loadHtml" name="">
+  <input type="button" id="loadIframe" value="loadIframe" name="">
 
   <script type="text/javascript">
-   var $alert = document.getElementById('alert');
+   var $alert = document.getElementById('alert1');
    var $confirm = document.getElementById('confirm');
+   var $html = document.getElementById('loadHtml');
+   var $iframe = document.getElementById('loadIframe');
 
    $alert.onclick = function(){
     dialog.alert({
       content:'测试的是alert!',
-      btn:[''],
+      btn:['ok'],
       callback:function(v){
         alert(v);
       }
@@ -41,6 +45,47 @@
         }
       });
    }
+
+   $html.onclick = function(){
+    dialog.loadHtml({
+      width:800,
+      height:300,
+      page:{ dom: '.alert'},
+      success:function(v){
+        //alert(v);
+        console.log(v.querySelector('.alert'));
+
+        var _alert = v.querySelector('.alert');
+        _alert.onclick = function(){
+          dialog.alert({
+      content:'测试的是alert!',
+      btn:['ok'],
+      callback:function(v){
+        alert(v);
+      }
+    });
+        }
+
+      },
+      close:function(v){
+        alert('hello');
+      }
+    })
+   }
+
+   $iframe.onclick = function(){
+    dialog.loadIframe({
+      content:'http://www.skysea.com/',
+      height:300,
+      width:500,
+      success:function(v){
+        alert('iframe内容加载完成！')
+        console.log(v);
+      }
+    })
+   }
+
+
 
 
   </script>

@@ -2,8 +2,9 @@
  * @Author: jypblue
  * @Date:   2016-09-22 17:49:55
  * @Last Modified by:   jypblue
- * @Last Modified time: 2016-09-22 20:57:09
+ * @Last Modified time: 2016-09-23 19:08:17
  */
+
 
 'use strict';
 (function(root, factory) {
@@ -22,7 +23,8 @@
   'use strict';
   var tips = {
     title: '提示信息',
-    btn: ['确定', '取消']
+    btn: ['确定', '取消'],
+    zIndex: 1000
   }
   var d = {};
 
@@ -51,12 +53,12 @@
 
     //如果弹窗已经存在，则先关闭，再新建
     if (d.dialogs.length) {
-      d.close();
+      d.close(set);
     }
 
     //创建弹窗
     var doms = createElements.call(this, set);
-
+    console.log(doms);
     //收集弹窗
     d.dialogs.push(doms);
 
@@ -68,7 +70,7 @@
 
     //点击确定按钮执行的函数
     doms.btnEnter.onclick = function() {
-      d.close();
+      d.close(set);
       //回调
       set.callback && set.callback.call(d, true, doms)
     };
@@ -90,7 +92,7 @@
 
     //点击关闭按钮，关闭弹框
     doms.close.onclick = function() {
-      d.close();
+      d.close(set);
     }
 
     //重置弹框位置 居中
@@ -118,32 +120,94 @@
       //获取插入的content的dom
       var data = document.getElementById('dialogBody');
       //关闭弹框
-      d.close();
+      d.close(set);
       //回调
       set.ok && set.ok.call(d, data, doms);
     };
 
     //点击取消回调
     doms.btnCancel.onclick = function() {
-      d.close();
+      d.close(set);
       set.cancel && set.cancel.call(d, false, doms);
     }
   }
 
   //页面层 html
   d.loadHtml = function(options) {
+    var set = extend({
+      width: 700,
+      height: 300,
+      type: 'loadHtml'
+    }, options || {});
+
+    var doms = this.alert(set);
+
+    doms.dialogWindow.removeChild(doms.dialogFooter);
+
+    doms.btnEnter.onclick = null;
+
+    if (set.page.dom) {
+      // debugger;
+      doms.dialogBody.innerHTML = document.querySelector(set.page.dom).outerHTML;
+      //回调函数
+      var data = document.getElementById('dialogBody');
+      set.success && set.success.call(d, data, doms);
+    } else {
+      doms.dialogBody.innerHTML = set.page.html;
+      //回调函数
+      var data = document.getElementById('dialogBody');
+      set.success && set.success.call(d, data, doms);
+    }
 
   }
 
   //加载iframe
-  d.loadIframe: function(options) {
+  d.loadIframe = function(options) {
+    var doc = win[this.globalSet.pos].document,
+      iframe = doc.createElement('iframe');
 
+    var set = extend({
+      width: 700,
+      height: 300,
+      type: 'loadIframe'
+    }, options || {});
+
+    var doms = this.alert(set);
+
+    doms.dialogWindow.removeChild(doms.dialogFooter);
+    doms.btnEnter.onclick = null;
+
+    iframe.style.cssText = 'width:100%;height:100%';
+    iframe.frameBorder = 0;
+
+    doms.dialogBody.innerHTML = '';
+    doms.dialogBody.appendChild(iframe);
+
+    iframe.attachEvent ? iframe.attachEvent('onload', _load) : (iframe.onload = _load);
+
+    function _load() {
+      //?还有问题，跨域
+      var innerDoc = iframe.contentWindow.document || iframe.contentDocument;
+
+      iframe.style.height = '0px';
+
+      if (set.height == 'auto') {
+        doms.dialogBody.style.height = Math.max(innerDoc.documentElement.offsetHeight, innerDoc.body.offsetHeight) + 'px';
+      }
+
+      set.success && set.success.call(d, iframe, doms);
+
+      iframe.style.height = '100%';
+      setCenter(doms, doc);
+    }
+
+    iframe.src = options.content;
   }
 
 
 
   //关闭弹窗
-  d.close = function() {
+  d.close = function(set) {
     var db = win[this.globalSet.pos].document.body,
       len = this.dialogs.length;
     //如果没有弹窗
@@ -152,6 +216,9 @@
     }
     remove(this.dialogs[0], db);
     this.dialogs.length = 0;
+    //关闭回调
+    var data = document.getElementById('dialogBody');
+    set.close && set.close.call(d, data);
   }
 
   //关闭所有弹窗
@@ -196,8 +263,8 @@
       close = createEl.call(doc, '<a href="javascript:void(0);" class="ui_dialog_close"></a>', dialogHeader),
       dialogBody = createEl.call(doc, '<div id="dialogBody" class="ui_dialog_bd" style="height:' + height + ';"></div>', dialogWindow),
       dialogFooter = createEl.call(doc, '<div class="ui_dialog_ft"></div>', dialogWindow),
-      btnEnter = createEl.call(doc, '<a href="javascript:;" class="btn btn_enter">' + (options.btn[0] || tips.btn[0]) + '</a>', dialogFooter),
-      btnCancel = createEl.call(doc, '<a href="javascript:;" class="btn btn_cancel">' + (options.btn[1] || tips.btn[1]) + '</a>');
+      btnEnter = createEl.call(doc, '<a href="javascript:;" class="btn btn_enter">' + (options.btn ? options.btn[0] : tips.btn[0]) + '</a>', dialogFooter),
+      btnCancel = createEl.call(doc, '<a href="javascript:;" class="btn btn_cancel">' + (options.btn ? options.btn[1] : tips.btn[1]) + '</a>');
 
     return {
       dialogMask: dialogMask,
