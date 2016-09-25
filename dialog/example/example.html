@@ -60,14 +60,13 @@
         var _alert = v.querySelector('.alert');
         _alert.onclick = function(){
           dialog.alert({
-      content:'测试的是alert!',
-      btn:['ok'],
-      callback:function(v){
-        alert(v);
-      }
-    });
+            content:'测试的是alert!',
+            btn:['ok'],
+            callback:function(v){
+              alert(v);
+            }
+          });
         }
-
       },
       close:function(v){
         alert('hello');
