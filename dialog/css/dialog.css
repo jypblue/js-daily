@@ -101,4 +101,52 @@
   color: #555;
 }
 .loading {
+  width: 32px;
+  height: 32px;
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 10px;
+  margin-right: 8px;
+  text-indent: -9999em;
+  border-radius: 50%;
+  background: #999;
+  background: -moz-linear-gradient(left, #999 10%, rgba(255, 255, 255, 0) 62%);
+  background: -webkit-linear-gradient(left, #999 10%, rgba(255, 255, 255, 0) 62%);
+  background: -o-linear-gradient(left, #999 10%, rgba(255, 255, 255, 0) 62%);
+  background: -ms-linear-gradient(left, #999 10%, rgba(255, 255, 255, 0) 62%);
+  background: linear-gradient(to right, #999 10%, rgba(255, 255, 255, 0) 62%);
+  position: relative;
+  -webkit-animation: load 0.75s infinite linear;
+  animation: load 0.75s infinite linear;
+}
+.loading:before {
+  width: 50%;
+  height: 50%;
+  background: #999;
+  border-radius: 100% 0 0 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: '';
+}
+.loading:after {
+  background: #fff;
+  width: 80%;
+  height: 80%;
+  border-radius: 50%;
+  content: '';
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+@keyframes load {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
