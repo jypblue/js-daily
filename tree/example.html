@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="tree.css">
+        <script type="text/javascript" src="tree.js"></script>
+    </head>
+    <body>
+        <p><a href="javascript: t.openAll();">open all</a> | <a href="javascript: t.closeAll();">close all</a></p>
+        <div class="tree"></div>
+        <input type='button' name='bTest' value='test' onclick='test();'>
+    <script type="text/javascript">
+          var data = [{
+            id: 0,
+            pid: -1,
+            cname: '菜单权限树'
+        }, {
+            id: 1,
+            pid: 0,
+            cname: 'authority',
+            cvalue: '25',
+            cshow: '一级菜单1'
+        }, {
+            id: 2,
+            pid: 1,
+            cname: 'authority',
+            cvalue: '26',
+            cshow: '二级菜单1'
+        }, {
+            id: 3,
+            pid: 2,
+            cname: 'authority',
+            cvalue: '27',
+            cshow: '三级菜单1'
+        }, {
+            id: 4,
+            pid: 2,
+            cname: 'authority',
+            cvalue: '28',
+            cshow: '三级菜单2'
+        }, {
+            id: 32,
+            pid: 3,
+            cname: 'authority',
+            cvalue: '26',
+            cshow: '二级菜单2'
+        }, {
+            id: 33,
+            pid: 32,
+            cname: 'authority',
+            cvalue: '27',
+            cshow: '用户管理'
+        }, {
+            id: 34,
+            pid: 32,
+            cname: 'authority',
+            cvalue: '28',
+            cshow: '用户组管理'
+        }, {
+            id: 22,
+            pid: 1,
+            cname: 'authority',
+            cvalue: '26',
+            cshow: '二级菜单1'
+        }, {
+            id: 23,
+            pid: 22,
+            cname: 'authority',
+            cvalue: '27',
+            cshow: '用户管理'
+        }, {
+            id: 24,
+            pid: 22,
+            cname: 'authority',
+            cvalue: '28',
+            cshow: '用户组管理'
+        }, {
+            id: 6,
+            pid: 0,
+            cname: 'authority',
+            cvalue: '25',
+            cshow: '一级菜单2',
+            cchecked: true,
+            cdisabled: true
+        }, {
+            id: 7,
+            pid: 6,
+            cname: 'authority',
+            cvalue: '26',
+            cshow: '二级菜单2',
+            cchecked: true,
+            cdisabled: true
+        },{
+           id: 8,
+            pid: 7,
+            cname: 'authority',
+            cvalue: '27',
+            cshow: '用户管理',
+            cchecked: true,
+            cdisabled: true
+        },{
+            id: 9,
+            pid: 7,
+            cname: 'authority',
+            cvalue: '28',
+            cshow: '用户组管理',
+            cchecked: true,
+            cdisabled: true
+        },{
+            id: 11,
+            pid: 0,
+            cname: 'authority',
+            cvalue: '25',
+            cshow: '一级菜单3'
+        },{
+            id: 12,
+            pid: 11,
+            cname: 'authority',
+            cvalue: '26',
+            cshow: '二级菜单3'
+        },{
+            id: 13,
+            pid: 12,
+            cname: 'authority',
+            cvalue: '27',
+            cshow: '用户管理'
+        },{
+            id: 14,
+            pid: 12,
+            cname: 'authority',
+            cvalue: '27',
+            cshow: '用户管理组'
+        }];
+
+      var c = tree({
+            el:'.tree',data:data
+        });
+      c.openAll();
+    </script>
+    <script type="text/javascript">
+    function test(){
+      var count = 0;
+      var obj = document.all.authority;
+
+      for(i=0;i<obj.length;i++){
+        if(obj[i].checked){
+          alert(obj[i].value);
+          count ++;
+        }
+      }
+    }
+    </script>
+
+</body>
+</html>
