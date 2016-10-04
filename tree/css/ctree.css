@@ -1,0 +1,91 @@
+@charset "UTF-8";
+
+/**
+ *
+ * @authors zx.wang (zx.wang1991@gmail.com)
+ * @date    2016-10-02 15:06:53
+ * @version $Id$
+ */
+body {
+  font-size: 12px;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  color: #1248AC;
+}
+.treeView ul {
+  background-color: white;
+}
+.treeView, .treeView ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.treeView div.hitArea {
+  height: 15px;
+  width: 15px;
+  margin-left: -30px;
+  float: left;
+  cursor: pointer;
+}
+
+/* fix for IE6 */
+* html div.hitArea {
+  background: #fff;
+  filter: alpha(opacity=0);
+  display: inline;
+  float: none;
+}
+.treeView li {
+  margin: 0;
+  padding: 3px 0pt 3px 16px;
+}
+.treeView a.selected {
+  background-color: #eee;
+}
+.treeView .hover {
+  color: red;
+  cursor: pointer;
+}
+.treeView li {
+  background: url('../ctreeimg/tv-item.gif') 0 0 no-repeat;
+}
+.treeView .collapsible {
+  background-image: url('../ctreeimg/tv-collapsable.gif');
+}
+.treeView .expandable {
+  background-image: url('../ctreeimg/tv-expandable.gif');
+  clear: both;
+  overflow: hidden;
+}
+.treeView .last {
+  background-image: url('../ctreeimg/tv-item-last.gif');
+}
+.treeView .lastCollapsible {
+  background-image: url('../ctreeimg/tv-collapsable-last.gif');
+}
+.treeView .lastExpandable {
+  background-image: url('../ctreeimg/tv-expandable-last.gif');
+}
+.fileTree li {
+  padding: 3px 0 1px 31px;
+}
+.fileTree span.folder, .fileTree span.file {
+  padding-left: 16px;
+  display: block;
+  width: 100px;
+  height: 15px;
+}
+.fileTree span.folder {
+  background: url('../ctreeimg/folder.gif') 0 0 no-repeat;
+  cursor: pointer
+}
+.fileTree span.file {
+  background: url('../ctreeimg/file.gif') 0 0 no-repeat;
+  cursor: pointer
+}
+.ckTree {
+  float: left;
+  display: inline-block;
+  margin: 1px 0  0 -15px;
+}
