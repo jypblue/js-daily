@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>layer h5 Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="css/layerh5.css" rel="stylesheet">
+<style type="text/css">
+  .btn{
+    display: inline-block;
+    padding: 4px 8px;
+    color: #fff;
+    background: red;
+    border-radius: 4px;
+    margin: 0 5px;
+  }
+</style>
+</head>
+<body>
+
+  <div class="btn-list">
+    <span class="btn j-msg">信息框</span>
+    <span class="btn j-tips">提示</span>
+    <span class="btn j-ask">询问框</span>
+    <span class="btn j-fdialog">底部对话框</span>
+    <span class="btn j-ftips">底部提示</span>
+    <span class="btn j-title">自定义标题风格</span>
+    <span class="btn j-page">页面层</span>
+    <span class="btn j-load">loading</span>
+    <span class="btn j-ldword">load带文字</span>
+
+  </div>
+  <script type="text/javascript" src="layerh5.js"></script>
+  <script type="text/javascript">
+    //信息框
+    document.querySelector('.j-msg').onclick = function(){
+      layer.open({
+        content: '移动版和PC版不能同时存在同一页面'
+        ,btn: '我知道了'
+      });
+    };
+
+    //提示
+    document.querySelector('.j-tips').onclick = function(){
+      layer.open({
+        content: 'hello layer'
+        ,skin: 'msg'
+        ,time: 2 //2秒后自动关闭
+      });
+    }
+
+    //询问框
+    document.querySelector('.j-ask').onclick = function(){
+      layer.open({
+        content: '您确定要刷新一下本页面吗？'
+        ,btn: ['刷新', '不要']
+        ,yes: function(index){
+          location.reload();
+          layer.close(index);
+        }
+      });
+    }
+
+    //底部对话框
+    document.querySelector('.j-fdialog').onclick = function(){
+      layer.open({
+        content: '这是一个底部弹出的询问提示'
+        ,btn: ['删除', '取消']
+        ,skin: 'footer'
+        ,yes: function(index){
+          layer.open({content: '执行删除操作'})
+        }
+      });
+    }
+
+    //底部提示
+    document.querySelector('.j-ftips').onclick = function(){
+        layer.open({
+          content: '一个没有任何按钮的底部提示'
+          ,skin: 'footer'
+        });
+    }
+
+    //自定义标题风格
+    document.querySelector('.j-title').onclick = function(){
+      layer.open({
+        title: [
+          '我是标题',
+          'background-color: #FF4351; color:#fff;'
+        ]
+        ,content: '标题风格任你定义。'
+      });
+    }
+
+    //页面层
+    document.querySelector('.j-page').onclick = function(){
+      layer.open({
+        type: 1
+        ,content: '可传入任何内容，支持html。一般用于手机页面中'
+        ,anim: 'up'
+        ,style: 'position:fixed; bottom:0; left:0; width: 100%; height: 200px; padding:10px 0; border:none;'
+      });
+    }
+
+    //loading层
+    document.querySelector('.j-load').onclick = function(){
+      layer.open({type: 2});
+    }
+
+    //loading带文字
+    document.querySelector('.j-ldword').onclick = function(){
+      layer.open({
+        type: 2
+        ,content: '加载中...'
+      });
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </script>
+
+</body>
+</html>
