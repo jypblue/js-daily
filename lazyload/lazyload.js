@@ -7,15 +7,13 @@
 
 ;
 (function(factory) {
-
+  var $ = root.Zepto ? 'zepto' : 'jquery';
   //amd
   if (typeof define === 'function' && define.amd) {
-    define(['jquery'], factory);
-    //define(['zepto'], factory);
-
+    define([$], factory);
   } else if (typeof module !== 'undefined' && typeof exports === 'object' && define.cmd) {
     //cmd
-    module.exports = factory;
+    module.exports = factory(require($));
   } else {
     factory(window.jQuery || window.Zepto);
   }
