@@ -12,7 +12,7 @@
   if (typeof define === 'function' && define.amd) {
     define([$], factory);
   } else if (typeof module !== 'undefined' && typeof exports === 'object' && define.cmd) {
-    module.exports = factory(require($));
+    module.exports = factory;
   } else {
     factory(root.jQuery || root.Zepto);
   }
